@@ -1,25 +1,27 @@
-import { Image, ScrollView, StyleSheet, Text } from 'react-native';
+import { FlatList, Text, View } from "react-native";
 
-export default function Home() {
+const data = [
+  { nim: "105841114722", nama: "Mutiara Dewi" },
+  { nim: "105841114222", nama: "Reski Asriani" },
+  { nim: "105841114333", nama: "Dzulviana" },
+  { nim: "105841114444", nama: "Annisa Alfrini" },
+];
+
+export default function HomeScreen() {
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Universitas Muhammadiyah Makassar</Text>
-      <Image
-        source={{ uri: 'https://unismuh.ac.id/wp-content/uploads/2021/05/unismuh.jpg' }}
-        style={styles.image}
-      />
-      <Text style={styles.description}>
-        Universitas Muhammadiyah Makassar (Unismuh Makassar) adalah salah satu perguruan tinggi swasta
-        yang berlokasi di Kota Makassar, Sulawesi Selatan. Kampus ini menawarkan berbagai program studi
-        dan berkomitmen mencetak lulusan yang berintegritas, unggul, dan berdaya saing global.
+    <View style={{ flex: 1, padding: 20 }}>
+      <Text style={{ fontSize: 22, fontWeight: "bold", marginBottom: 15 }}>
+        Daftar Mahasiswa
       </Text>
-    </ScrollView>
+      <FlatList
+        data={data}
+        keyExtractor={(item) => item.nim}
+        renderItem={({ item }) => (
+          <Text style={{ fontSize: 18, marginVertical: 5 }}>
+            {item.nim} - {item.nama}
+          </Text>
+        )}
+      />
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#fff', padding: 16 },
-  title: { fontSize: 20, fontWeight: 'bold', marginBottom: 12, textAlign: 'center', color: '#1a4d2e' },
-  image: { width: '100%', height: 200, borderRadius: 10, marginBottom: 16 },
-  description: { fontSize: 14, lineHeight: 20, textAlign: 'justify', color: '#333' },
-});
